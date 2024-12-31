@@ -15,7 +15,7 @@ class AddUserInfor extends React.Component {
             name: "Eric",
             ag: Math.floor(Math.random() * 100 + 1),
             // address: 'Hoi Dan IT',
-            // age: 26
+            // age: 27
         });
     }
 
