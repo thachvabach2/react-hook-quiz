@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
 import { toast } from 'react-toastify';
-import { postCreateNewUser } from '../../../services/apiService';
+import { putUpdateUser } from '../../../services/apiService';
 import _ from 'lodash';
 
 
@@ -18,6 +18,7 @@ const ModalUpdateUser = (props) => {
         setRole('USER')
         setImage('')
         setPreviewImage('')
+        props.resetUpdateData()
     }
 
     const [email, setEmail] = useState('')
@@ -67,12 +68,7 @@ const ModalUpdateUser = (props) => {
             return;
         }
 
-        if (!password) {
-            toast.error('invalid pasword')
-            return;
-        }
-
-        let data = await postCreateNewUser(email, password, username, role, image)
+        let data = await putUpdateUser(dataUpdate.id, username, role, image)
         console.log('>>> component response', data)
         if (data && data.EC === 0) {
             toast.success(data.EM)
@@ -103,7 +99,7 @@ const ModalUpdateUser = (props) => {
                             <input
                                 type="email"
                                 className="form-control"
-                                value={dataUpdate.email}
+                                value={email}
                                 disabled
                                 onChange={(event) => setEmail(event.target.value)}
                             />
@@ -123,7 +119,7 @@ const ModalUpdateUser = (props) => {
                             <input
                                 type="text"
                                 className="form-control"
-                                value={props.dataUpdate.username}
+                                value={username}
                                 onChange={(event) => setUsername(event.target.value)}
                             />
                         </div>
@@ -131,7 +127,7 @@ const ModalUpdateUser = (props) => {
                             <label className="form-label">Role</label>
                             <select className="form-select"
                                 onChange={(event) => setRole(event.target.value)}
-                                value={props.dataUpdate.role}
+                                value={role}
                             >
                                 <option value={"USER"}>USER</option>
                                 <option value={"ADMIN"}>ADMIN</option>
