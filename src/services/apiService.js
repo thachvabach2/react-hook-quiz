@@ -9,7 +9,7 @@ const postCreateNewUser = (email, password, username, role, image) => {
     data.append('role', role);
     data.append('userImage', image);
 
-    return axios.put('api/v1/participant', data)
+    return axios.post('api/v1/participant', data)
 }
 
 const putUpdateUser = (id, username, role, image) => {
