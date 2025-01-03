@@ -1,0 +1,25 @@
+.container {
+    .header {
+        button {
+            border: 1px solid;
+
+            &:hover {
+                background-color: white;
+            }
+        }
+    }
+
+    .form-container {
+        .content-form {
+            .pass-group {
+                position: relative;
+
+                .icon-eyes {
+                    position: absolute;
+                    right   : 10px;
+                    bottom  : 10px;
+                }
+            }
+        }
+    }
+}
