@@ -3,9 +3,12 @@ import './Login.scss'
 import { useNavigate } from "react-router-dom";
 import { postLogin } from '../../services/apiService';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { doLogin } from '../../redux/action/userAction';
 
 const Login = (props) => {
-    const nagivate = useNavigate()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -34,8 +37,9 @@ const Login = (props) => {
         // submit apis
         let data = await postLogin(email, password)
         if (data && data.EC === 0) {
+            dispatch(doLogin(data))
             toast.success(data.EM)
-            nagivate('/')
+            navigate('/')
         }
         if (data && +data.EC !== 0) {
             toast.error(data.EM)
@@ -46,7 +50,7 @@ const Login = (props) => {
         <div className='login-container'>
             <div className='header'>
                 <span>Don't have an account yet?</span>
-                <button onClick={() => nagivate('/register')}>Sign up</button>
+                <button onClick={() => navigate('/register')}>Sign up</button>
             </div>
             <div className='title col-4 mx-auto'>
                 ITZuiZe
@@ -84,7 +88,7 @@ const Login = (props) => {
                     <div className='text-center'>
                         <span
                             className='back'
-                            onClick={() => { nagivate('/') }}
+                            onClick={() => { navigate('/') }}
                         >
                             &#60;&#60; Go to Homepage
                         </span>
