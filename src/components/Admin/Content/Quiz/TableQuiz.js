@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react'
 import { getAllQuizForAdmin } from '../../../../services/apiService'
+import ModalUpdateQuiz from './ModalUpdateQuiz'
+import ModalDeleteQuiz from './ModalDeleteQuiz'
 
-const TableQuiz = () => {
+const TableQuiz = (props) => {
     const [listQuiz, setListQuiz] = useState([])
+
+    const [showModalUpdate, setShowModalUpdate] = useState(false)
+    const [showModalDelete, setShowModalDelete] = useState(false)
+
+    const [quizUpdate, setQuizUpdate] = useState({})
+    const [quizDelete, setQuizDelete] = useState({})
 
     useEffect(() => {
         fetchQuiz()
@@ -15,7 +23,16 @@ const TableQuiz = () => {
         }
     }
 
-    console.log('listQuiz: ', listQuiz)
+    const handleUpdateQuiz = (quiz) => {
+        setShowModalUpdate(true)
+        setQuizUpdate(quiz)
+    }
+
+    const handleDeleteQuiz = (quiz) => {
+        setShowModalDelete(true)
+        setQuizDelete(quiz)
+    }
+
     return (
         <>
             <div>List Quizzes</div>
@@ -40,8 +57,17 @@ const TableQuiz = () => {
                                     <td>{item.difficulty}</td>
                                     <td>
                                         <div style={{ display: 'flex', gap: '15px' }}>
-                                            <button className='btn btn-warning'>Edit</button>
-                                            <button className='btn btn-danger'>Delete
+                                            <button
+                                                className='btn btn-warning'
+                                                onClick={() => handleUpdateQuiz(item)}
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                className='btn btn-danger'
+                                                onClick={() => handleDeleteQuiz(item)}
+                                            >
+                                                Delete
                                             </button>
                                         </div>
                                     </td>
@@ -55,6 +81,19 @@ const TableQuiz = () => {
                     }
                 </tbody>
             </table>
+            <ModalUpdateQuiz
+                show={showModalUpdate}
+                setShow={setShowModalUpdate}
+                dataUpdate={quizUpdate}
+                fetchQuiz={fetchQuiz}
+            />
+
+            <ModalDeleteQuiz
+                show={showModalDelete}
+                setShow={setShowModalDelete}
+                dataDelete={quizDelete}
+                fetchQuiz={fetchQuiz}
+            />
         </>
     )
 }
