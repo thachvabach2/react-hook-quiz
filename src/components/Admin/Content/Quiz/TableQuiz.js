@@ -19,7 +19,7 @@ const TableQuiz = () => {
     return (
         <>
             <div>List Quizzes</div>
-            <table className="table table-hover table-bordered mt-2">
+            <table className="table table-hover table-bordered my-2">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -39,11 +39,11 @@ const TableQuiz = () => {
                                     <td>{item.description}</td>
                                     <td>{item.difficulty}</td>
                                     <td>
-                                        <td style={{ display: 'flex', gap: '15px' }}>
+                                        <div style={{ display: 'flex', gap: '15px' }}>
                                             <button className='btn btn-warning'>Edit</button>
                                             <button className='btn btn-danger'>Delete
                                             </button>
-                                        </td>
+                                        </div>
                                     </td>
                                 </tr>
                             )
