@@ -8,26 +8,27 @@ import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash'
 import Lightbox from "react-awesome-lightbox";
 import { getAllQuizForAdmin, postCreateNewQuestionForQuiz, postCreateNewAnswerForQuestion } from '../../../../services/apiService';
+import { toast } from 'react-toastify';
 
 const Questions = (props) => {
+    const initQuestions = [
+        {
+            id: uuidv4(),
+            description: '',
+            imageFile: '',
+            imageName: '',
+            answers: [
+                {
+                    id: uuidv4(),
+                    description: '',
+                    isCorrect: false,
+                    isValid: true
+                }
+            ]
+        }
+    ]
 
-    const [questions, setQuestions] = useState(
-        [
-            {
-                id: uuidv4(),
-                description: '',
-                imageFile: '',
-                imageName: '',
-                answers: [
-                    {
-                        id: uuidv4(),
-                        description: '',
-                        isCorrect: false
-                    }
-                ]
-            }
-        ]
-    )
+    const [questions, setQuestions] = useState(initQuestions)
 
     const [isPreviewImage, setIsPreviewImage] = useState(false)
     const [dataImagePreview, setDataImagePreview] = useState({
@@ -66,7 +67,8 @@ const Questions = (props) => {
                     {
                         id: uuidv4(),
                         description: '',
-                        isCorrect: false
+                        isCorrect: false,
+                        isValid: true
                     }
                 ]
             }
@@ -87,7 +89,8 @@ const Questions = (props) => {
             const newAnswer = {
                 id: uuidv4(),
                 description: '',
-                isCorrect: false
+                isCorrect: false,
+                isValid: true
             }
 
             let index = questionClone.findIndex(item => item.id === questionId)
@@ -143,24 +146,74 @@ const Questions = (props) => {
 
     const handleSubmitQuestionForQuiz = async () => {
         //todo
-        //validate data
+        //validate selectedQuiz
+        if (_.isEmpty(selectedQuiz)) {
+            toast.error('Please choose a Quiz!')
+            return;
+        }
 
-        // submit questions
-        await Promise.all(questions.map(async (question) => {
+        //validate answer
+        let isValidAnswer = true
+        let indexQ = 0, indexA = 0
+        for (let i = 0; i < questions.length; i++) {
+            for (let j = 0; j < questions[i].answers.length; j++) {
+                if (!questions[i].answers[j].description) {
+                    isValidAnswer = false
+                    indexA = j
+                    break
+                }
+            }
+            indexQ = i
+            if (isValidAnswer === false) {
+                break
+            }
+        }
+
+        if (isValidAnswer === false) {
+            toast.error(`Not empty Answers ${indexA + 1} at Question ${indexQ + 1}`)
+            let questionsClone = _.cloneDeep(questions)
+            questionsClone.map(question => {
+                question.answers.map(answer => {
+                    answer.isValid = true
+                })
+            })
+            questionsClone[indexQ].answers[indexA].isValid = false
+            setQuestions(questionsClone)
+            return
+        }
+
+        //validate question
+        let isValidQ = true
+        let indexQ1 = 0
+        for (let i = 0; i < questions.length; i++) {
+            if (!questions[i].description) {
+                isValidQ = false
+                indexQ1 = i
+                break
+            }
+        }
+        if (isValidQ === false) {
+            toast.error(`Not empty description for Question ${indexQ1 + 1}`)
+            return
+        }
+
+        for (const question of questions) {
+            // submit questions
             const q = await postCreateNewQuestionForQuiz(
                 +selectedQuiz.value,
                 question.description,
-                question.imageFile);
+                question.imageFile)
 
             // submit answers
-            await Promise.all(question.answers.map(async (answer) => {
+            for (const answer of question.answers) {
                 await postCreateNewAnswerForQuestion(
                     answer.description, answer.isCorrect, q.DT.id
                 )
-            }))
-            console.log('>>>> check q: ', q)
-        }));
+            }
+        }
 
+        toast.success('Create questions and answers succeed!')
+        setQuestions(initQuestions)
     }
 
     const handlePreviewImage = (questionId) => {
@@ -256,7 +309,7 @@ const Questions = (props) => {
                                                     <input
                                                         value={answer.description}
                                                         type="text"
-                                                        className="form-control"
+                                                        className={answer.isValid === false ? 'form-control is-invalid' : 'form-control'}
                                                         placeholder="name@example.com"
                                                         onChange={(event) => handleAnswerQuestion('INPUT', answer.id, question.id, event.target.value)}
                                                     />
