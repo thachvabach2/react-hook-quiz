@@ -35,6 +35,14 @@ instance.interceptors.response.use(function (response) {
     return response && response.data ? response.data : response;
 }, function (error) {
     NProgress.done();
+    // Xử lý access token hết hạn (back end trả về -999)
+    // C1 (dễ): đá về trang /login
+    if (error.response.data && error.response.data.EC === -999) {
+        window.location.href = '/login'
+    }
+
+    //C2: gọi refresh token để lấy lại access-token(dùng axios-retry)
+
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return error && error.response && error.response.data

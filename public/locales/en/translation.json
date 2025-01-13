@@ -3,7 +3,52 @@
         "title1": "There's a better way to ask",
         "title2": "Collect all the data you need to understand customers with forms designed to be refreshingly different.",
         "title3": {
-            "login": "Get's started. It's free"
+            "login": "Get's started. It's free",
+            "users": "Doing Quiz Now"
+        }
+    },
+    "header": {
+        "brand": "IT Zui Ze",
+        "home": "Home",
+        "users": "Users",
+        "admin": "Admin",
+        "login": "Log in",
+        "signup": "Sign up",
+        "setting": "Setting",
+        "profile": "Profile",
+        "logout": "Log out"
+    },
+    "admin": {
+        "sidebar": {
+            "brand": "IT Zui Ze",
+            "dashboard": "Dashboard",
+            "title": "Features",
+            "manage-user": "Manage User",
+            "manage-quiz": "Manage Quiz",
+            "manage-question": "Manage Question"
+        },
+        "dashboard": {
+            "title": "Analytics Dashboard",
+            "content": {
+                "c-left": {
+                    "child": {
+                        "total-users": "Total users",
+                        "total-quizzes": "Total Quizzes",
+                        "total-questions": "Total Questions",
+                        "total-answers": "Total Answers"
+                    }
+                }
+            }
+        },
+        "manage-users": {
+            "title": "Manage User",
+            "users-content": {
+                "add-new": "Add new user"
+            },
+            "table-user-container": {
+                "role": "Role",
+                "actions": "Actions"
+            }
         }
     }
 }

@@ -17,9 +17,11 @@ import { MdDashboard } from "react-icons/md";
 
 import './SideBar.scss'
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const SideBar = (props) => {
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
     const { image, collapsed, toggled, handleToggleSidebar } = props
     return (
@@ -45,32 +47,32 @@ const SideBar = (props) => {
                         }}
                     >
                         <DiReact size={'3rem'} color={"00bfff"} />
-                        <span onClick={() => navigate('/')}>IT Zui Zẻ</span>
+                        <span onClick={() => navigate('/')}>{t('admin.sidebar.brand')}</span>
                     </div>
                 </SidebarHeader>
 
                 <SidebarContent>
                     <Menu iconShape="circle">
                         <MenuItem icon={<MdDashboard />}>
-                            Dashboard
+                            {t('admin.sidebar.dashboard')}
                             <Link to='/admins'></Link>
                         </MenuItem>
                     </Menu>
                     <Menu iconShape="circle">
                         <SubMenu
                             icon={<FaGem />}
-                            title="Features"
+                            title={t('admin.sidebar.title')}
                         >
                             <MenuItem>
-                                Quản lý User
+                                {t('admin.sidebar.manage-user')}
                                 <Link to='/admins/manage-users'></Link>
                             </MenuItem>
                             <MenuItem>
-                                Quản Lý Bài Quiz
+                                {t('admin.sidebar.manage-quiz')}
                                 <Link to='/admins/manage-quizzes'></Link>
                             </MenuItem>
                             <MenuItem>
-                                Quản Lý Câu Hỏi
+                                {t('admin.sidebar.manage-question')}
                                 <Link to='/admins/manage-questions'></Link>
                             </MenuItem>
                         </SubMenu>

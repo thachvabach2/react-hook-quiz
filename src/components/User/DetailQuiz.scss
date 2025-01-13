@@ -1,7 +1,7 @@
 .detail-quiz-container {
     display: flex;
-    gap    : 30px;
-    padding: 50px;
+    gap    : 20px;
+    padding: 10px 70px 50px 70px;
 
     .left-content {
         border       : 2px solid #ccc;
@@ -94,5 +94,13 @@
                 }
             }
         }
+    }
+}
+
+.quiz-detail-new-header {
+    padding: 25px 70px;
+
+    a {
+        text-decoration: none !important;
     }
 }

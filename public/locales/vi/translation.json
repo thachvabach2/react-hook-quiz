@@ -3,7 +3,52 @@
         "title1": "Có rất nhiều cách để hỏi",
         "title2": "Thu thập tất cả dữ liệu bạn cần để hiểu khách hàng bằng các biểu mẫu được thiết kế mới mẻ và khác biệt.",
         "title3": {
-            "login": "Hãy bắt đầu. Nó miễn phí"
+            "login": "Hãy bắt đầu. Nó miễn phí",
+            "users": "Làm Bài Quiz Ngay"
+        }
+    },
+    "header": {
+        "brand": "IT Zui Zẻ",
+        "home": "Trang chủ",
+        "users": "Người Dùng",
+        "admin": "Quản Trị",
+        "login": "Đăng Nhập",
+        "signup": "Đăng Ký",
+        "setting": "Cài Đặt",
+        "profile": "Hồ Sơ",
+        "logout": "Đăng Xuất"
+    },
+    "admin": {
+        "sidebar": {
+            "brand": "IT Zui Zẻ",
+            "dashboard": "Tổng Quan",
+            "title": "Chức Năng",
+            "manage-user": "Quản Lý Người Dùng",
+            "manage-quiz": "Quản Lý Quizzes",
+            "manage-question": "Quản Lý Questions"
+        },
+        "dashboard": {
+            "title": "Thống Kê",
+            "content": {
+                "c-left": {
+                    "child": {
+                        "total-users": "Tổng Users",
+                        "total-quizzes": "Tổng Bài Test",
+                        "total-questions": "Tổng Câu Hỏi",
+                        "total-answers": "Tổng Câu Trả Lời"
+                    }
+                }
+            }
+        },
+        "manage-users": {
+            "title": "Quản Lý Người Dùng",
+            "users-content": {
+                "add-new": "Thêm Mới"
+            },
+            "table-user-container": {
+                "role": "Vai Trò",
+                "actions": "Hành Động"
+            }
         }
     }
 }

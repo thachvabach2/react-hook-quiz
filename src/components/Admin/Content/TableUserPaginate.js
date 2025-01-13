@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 import { getAllUsers } from '../../../services/apiService'
 import ReactPaginate from 'react-paginate'
+import { useTranslation } from 'react-i18next'
 
 const TableUserPaginate = (props) => {
+    const { t } = useTranslation()
+
     const { listUsers, pageCount } = props
 
     const handlePageClick = (event) => {
@@ -19,8 +22,8 @@ const TableUserPaginate = (props) => {
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Role</th>
-                        <th>Actions</th>
+                        <th scope="col">{t('admin.manage-users.table-user-container.role')}</th>
+                        <th>{t('admin.manage-users.table-user-container.actions')}</th>
                     </tr>
                 </thead>
                 <tbody>
