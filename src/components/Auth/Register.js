@@ -6,9 +6,10 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import Language from '../Header/Language'
 
 const Register = () => {
-    const nagivate = useNavigate()
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -20,7 +21,7 @@ const Register = () => {
         let data = await postRegister(email, password, username)
         if (data && data.EC === 0) {
             toast.success(data.EM)
-            nagivate('/login')
+            navigate('/login')
         }
         if (data && data.EC !== 0) {
             toast.error(data.EM)
@@ -30,14 +31,17 @@ const Register = () => {
     return (
         <div className='container'>
             <div className='row'>
-                <div className='header d-flex justify-content-end mt-2'>
-                    <span className='mx-3 my-auto'>Already have an account?</span>
+                <div className='header d-flex justify-content-end mt-2 gap-3 pe-5'>
+                    <span className='my-auto'>Already have an account?</span>
                     <button
-                        className='px-3 py-1 rounded me-5'
-                        onClick={() => nagivate('/login')}
+                        className='px-3 py-1 rounded'
+                        onClick={() => navigate('/login')}
                     >
                         Log in
                     </button>
+                    <div className='my-auto pe-5'>
+                        <Language />
+                    </div>
                 </div>
             </div>
             <div className='row justify-content-center'>
@@ -100,7 +104,8 @@ const Register = () => {
                             </div>
                             <span
                                 className='text-center'
-                                onClick={() => nagivate('/')}
+                                role="button"
+                                onClick={() => navigate('/')}
                             >&#60;&#60; Go to Homepage
                             </span>
                         </div>
