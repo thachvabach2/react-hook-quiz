@@ -1,6 +1,7 @@
 
 import { INCREMENT, DECREMENT } from '../action/counterAction';
-import { FETCH_USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS } from '../action/userAction';
+import { FETCH_USER_LOGIN_SUCCESS, UPDATE_PROFILE_SUCCESS, USER_LOGOUT_SUCCESS } from '../action/userAction';
+import _ from 'lodash'
 
 const INITIAL_STATE = {
     account: {
@@ -40,11 +41,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 },
                 isAuthenticated: false
             }
-
-        case DECREMENT:
-            return {
-                ...state, count: state.count - 1,
-            };
+        case UPDATE_PROFILE_SUCCESS:
+            console.log('action: ', action)
+            let stateClone = _.cloneDeep(state)
+            stateClone.account.username = action.payload.username
+            stateClone.account.image = action.payload.image
+            return stateClone
         default: return state;
     }
 };

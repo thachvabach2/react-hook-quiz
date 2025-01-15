@@ -1,9 +1,13 @@
 import Modal from 'react-bootstrap/Modal';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import UserInfor from './UserInfor';
+import './Share.scss'
+import Password from './Password';
+import History from './History';
 
 const Profile = (props) => {
-    const { show, setShow } = props
+    const { show, setShow, account } = props
 
     const handleClose = () => {
         setShow(false)
@@ -22,18 +26,18 @@ const Profile = (props) => {
             </Modal.Header>
             <Modal.Body>
                 <Tabs
-                    defaultActiveKey="profile"
+                    defaultActiveKey="home"
                     id="uncontrolled-tab-example"
                     className="mb-3"
                 >
                     <Tab eventKey="home" title="Main Infor">
-                        your Information
+                        <UserInfor />
                     </Tab>
                     <Tab eventKey="password" title="Password">
-                        Change Password
+                        <Password />
                     </Tab>
                     <Tab eventKey="history" title="History">
-                        Your History
+                        <History />
                     </Tab>
                 </Tabs>
             </Modal.Body>
